@@ -58,11 +58,8 @@ def authenticate_google_drive():
                 }
             }
             flow = InstalledAppFlow.from_client_config(client_config, SCOPES)
-            creds = flow.run_local_server(port=0)
-        
-        os.makedirs(os.path.dirname(token_path), exist_ok=True)
-        with open(token_path, 'wb') as token:
-            pickle.dump(creds, token)
+            creds = flow.run_local_server()
+
 
     return build('drive', 'v3', credentials=creds)
 
